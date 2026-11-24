@@ -149,6 +149,17 @@ Build both at once; the user will want the repo copy.
   Claude edit its own permission settings to get around a block; that change is the user's
   to make by hand.
 
+## Installing in a new clone
+
+This skill lives in `.agents/skills/evidence-review/` (committed). Claude Code reads skills
+from `.claude/skills/`, which is git-ignored and holds links. Create the link once per clone;
+the guard skips it when the link exists (running plain `ln -s` twice creates a broken link
+inside the skill folder):
+
+```bash
+[ -e .claude/skills/evidence-review ] || { mkdir -p .claude/skills && ln -s ../../.agents/skills/evidence-review .claude/skills/evidence-review; }
+```
+
 ## Reference files
 
 | File | When to read |
